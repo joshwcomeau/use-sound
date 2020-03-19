@@ -1,12 +1,18 @@
 import React from 'react';
-import { Thing } from '@';
+import useSound from '@';
+
+import boopSfx from '../example/boop.mp3';
 
 export default {
-  title: 'Welcome',
+  title: 'Stories',
 };
 
-export const toStorybook = () => <Thing />;
+export const simple = () => {
+  const [playBoop] = useSound(boopSfx);
 
-toStorybook.story = {
-  name: 'to Storybook',
+  return <button onClick={playBoop}>Play SFX</button>;
+};
+
+simple.story = {
+  name: 'Default',
 };
