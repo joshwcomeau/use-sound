@@ -13,7 +13,7 @@ export interface HookOptions {
 export interface PlayOptions {
   id?: string;
   forceSoundEnabled?: boolean;
-  rate?: number;
+  playbackRate?: number;
 }
 
 export type PlayFunction = (options: PlayOptions) => void;
