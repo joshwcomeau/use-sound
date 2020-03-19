@@ -3,7 +3,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 
 import { useSpriteSound } from '@';
 
-import dunDunDunSfx from '../example/dun-dun-dun.mp3';
+import dunDunDunSfx from './dun-dun-dun.mp3';
 
 export default {
   title: 'useSoundSprite',

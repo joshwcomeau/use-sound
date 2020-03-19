@@ -68,10 +68,6 @@ export default function useSound(
         return;
       }
 
-      if (options.rate) {
-        sound.rate(options.rate);
-      }
-
       if (interrupt) {
         sound.stop();
       }

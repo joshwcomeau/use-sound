@@ -3,9 +3,9 @@ import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import { useSound } from '@';
 
-import boopSfx from '../example/boop.mp3';
-import fanfareSfx from '../example/fanfare.mp3';
-import dunDunDunSfx from '../example/dun-dun-dun.mp3';
+import boopSfx from './boop.mp3';
+import fanfareSfx from './fanfare.mp3';
+import glugSfx from './glug.mp3';
 
 export default {
   title: 'useSound',
@@ -55,27 +55,36 @@ Interrupt.story = {
   name: 'Interruptible',
 };
 
-export const Sprite = () => {
-  const [play] = useSound(fanfareSfx, {
-    sprite: {
-      first: [0, 321],
-      second: [321, 660],
-      third: [660, 2184],
-    },
+export const RisingPitch = () => {
+  const [pitchMultiple, setPitchMultiple] = React.useState(0.75);
+  const isAscending = React.useRef(false);
+
+  const [play] = useSound(glugSfx, {
+    playbackRate: pitchMultiple,
+    interrupt: true,
   });
 
+  const handleClick = () => {
+    if (pitchMultiple < 0.75 || pitchMultiple > 1.5) {
+      isAscending.current = !isAscending.current;
+    }
+
+    setPitchMultiple(pitchMultiple + 0.1 * (isAscending.current ? 1 : -1));
+
+    play();
+  };
+
+  /* eslint-disable jsx-a11y/accessible-emoji */
   return (
     <>
-      <button onClick={play.first}>🎵</button>
-      <button onClick={play.second}>🎶</button>
-      <button onClick={play.third}>🎼</button>
-      <br />
-      <br />
-      (Use the "Knobs" tab below to toggle <em>Interrupt</em>)
+      <button aria-label="Trigger sound effect" onClick={handleClick}>
+        🗣
+      </button>
     </>
   );
+  /* eslint-enable jsx-a11y/accessible-emoji */
 };
 
-Sprite.story = {
-  name: 'Sprite',
+RisingPitch.story = {
+  name: 'Rising Pitch',
 };
