@@ -1,11 +1,11 @@
 {
+  "name": "use-sound",
+  "author": "Josh Comeau",
+  "module": "dist/use-sound.esm.js",
   "version": "0.1.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
@@ -15,29 +15,19 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "peerDependencies": {
-    "react": ">=16"
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "howler": "^2.1.3"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
-  },
-  "prettier": {
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
-  "name": "use-sound",
-  "author": "Joshua Comeau",
-  "module": "dist/use-sound.esm.js",
   "devDependencies": {
     "@babel/core": "^7.8.7",
     "@storybook/addon-actions": "^5.3.17",
     "@storybook/addon-links": "^5.3.17",
     "@storybook/addons": "^5.3.17",
     "@storybook/react": "^5.3.17",
+    "@types/howler": "^2.1.2",
     "@types/jest": "^25.1.4",
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
@@ -49,5 +39,19 @@
     "tsdx": "^0.12.3",
     "tslib": "^1.11.1",
     "typescript": "^3.8.3"
+  },
+  "peerDependencies": {
+    "react": ">=16.8"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
   }
 }
