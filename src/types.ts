@@ -8,6 +8,7 @@ export interface HookOptions {
   interrupt?: boolean;
   soundEnabled?: boolean;
   sprite?: SpriteMap;
+  onload?: () => void;
 }
 
 export interface PlayOptions {
@@ -20,8 +21,10 @@ export type PlayFunction = (options: PlayOptions) => void;
 
 export interface ExposedData {
   sound: Howl | null;
-  stop: (id?: number) => void;
+  stop: (id?: string) => void;
+  pause: (id?: string) => void;
   isPlaying: boolean;
+  duration: number | null;
 }
 
 export type ReturnedValue = [PlayFunction, ExposedData];

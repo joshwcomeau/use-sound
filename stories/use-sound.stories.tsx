@@ -1,7 +1,7 @@
 import React from 'react';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 
-import { useSound } from '@';
+import useSound from '@';
 
 import boopSfx from './boop.mp3';
 import fanfareSfx from './fanfare.mp3';
@@ -24,6 +24,22 @@ export const Simple = () => {
 
 Simple.story = {
   name: 'Default',
+};
+
+export const Hovering = () => {
+  const [play, { stop }] = useSound(fanfareSfx);
+
+  return (
+    <Button onMouseEnter={play} onMouseLeave={stop}>
+      <span role="img" aria-label="trumpet">
+        🎺
+      </span>
+    </Button>
+  );
+};
+
+Hovering.story = {
+  name: 'Play when hovering',
 };
 
 export const Toggleable = () => {
@@ -78,15 +94,13 @@ export const RisingPitch = () => {
     play();
   };
 
-  /* eslint-disable jsx-a11y/accessible-emoji */
   return (
-    <>
-      <Button aria-label="Trigger sound effect" onClick={handleClick}>
+    <Button aria-label="Trigger sound effect" onClick={handleClick}>
+      <span role="img" aria-label="yelling person">
         🗣
-      </Button>
-    </>
+      </span>
+    </Button>
   );
-  /* eslint-enable jsx-a11y/accessible-emoji */
 };
 
 RisingPitch.story = {
@@ -94,7 +108,7 @@ RisingPitch.story = {
 };
 
 export const Sprite = () => {
-  const [playSound] = useSound(dunDunDunSfx, {
+  const [playSound, { duration }] = useSound(dunDunDunSfx, {
     sprite: {
       first: [0, 321],
       second: [321, 630 - 321],
@@ -102,6 +116,28 @@ export const Sprite = () => {
     },
     interrupt: true,
   });
+
+  React.useEffect(() => {
+    const handlePress = ev => {
+      switch (ev.key) {
+        case '1': {
+          return playSound({ id: 'first' });
+        }
+        case '2': {
+          return playSound({ id: 'second' });
+        }
+        case '3': {
+          return playSound({ id: 'third' });
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handlePress);
+
+    return () => {
+      window.removeEventListener('keydown', handlePress);
+    };
+  }, [playSound]);
 
   return (
     <>

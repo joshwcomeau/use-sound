@@ -11,13 +11,26 @@ export default function useSound(
     playbackRate = 1,
     soundEnabled = true,
     interrupt = false,
+    onload,
     ...delegated
   }: HookOptions = {}
 ) {
   const HowlConstructor = React.useRef<HowlStatic | null>(null);
+
   const [isPlaying, setIsPlaying] = React.useState(false);
+  const [duration, setDuration] = React.useState<number | null>(null);
 
   const [sound, setSound] = React.useState<Howl | null>(null);
+
+  const handleLoad = function() {
+    if (typeof onload === 'function') {
+      // @ts-ignore
+      onload.call(this);
+    }
+
+    // @ts-ignore
+    setDuration(this.duration() * 1000);
+  };
 
   // We want to lazy-load Howler, since sounds can't play on load anyway.
   useOnMount(() => {
@@ -27,6 +40,7 @@ export default function useSound(
       const sound = new HowlConstructor.current({
         src: [url],
         volume,
+        onload: handleLoad,
         ...delegated,
       });
 
@@ -43,6 +57,7 @@ export default function useSound(
         new HowlConstructor.current({
           src: [url],
           volume,
+          onload: handleLoad,
           ...delegated,
         })
       );
@@ -68,7 +83,11 @@ export default function useSound(
   }, [volume, playbackRate]);
 
   const play: PlayFunction = React.useCallback(
-    (options: PlayOptions = {}) => {
+    (options?: PlayOptions) => {
+      if (typeof options === 'undefined') {
+        options = {};
+      }
+
       if (!sound || (!soundEnabled && !options.forceSoundEnabled)) {
         return;
       }
@@ -90,20 +109,36 @@ export default function useSound(
     [sound, soundEnabled, interrupt]
   );
 
-  const stop = React.useCallback(() => {
-    if (!sound) {
-      return;
-    }
-    sound.stop();
-    setIsPlaying(false);
-  }, [sound]);
+  const stop = React.useCallback(
+    id => {
+      if (!sound) {
+        return;
+      }
+      sound.stop(id);
+      setIsPlaying(false);
+    },
+    [sound]
+  );
+
+  const pause = React.useCallback(
+    id => {
+      if (!sound) {
+        return;
+      }
+      sound.pause(id);
+      setIsPlaying(false);
+    },
+    [sound]
+  );
 
   const returnedValue: ReturnedValue = [
     play,
     {
       sound,
       stop,
+      pause,
       isPlaying,
+      duration,
     },
   ];
 
