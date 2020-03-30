@@ -4,13 +4,13 @@
 
 The web needs more (tasteful) sounds!
 
-- 🔊 Lets your website communicate using 2 human senses instead of 1
+- 👂 Lets your website communicate using 2 human senses instead of 1
 - 🔥 Declarative Hooks API
-- ⚡️ <10kb gzip total, <800 bytes in your bundle!
+- ⚡️ <1kb bytes (gzip) in your bundle! ~10kb loaded async.
 - ✨ Built with Typescript
 - 🗣 Uses a powerful, battle-tested audio utility: **Howler.js**
 
-[![Minified file size](https://img.badgesize.io/https://www.unpkg.com/use-sound@0.3.0/dist/use-sound.esm.js.svg)](https://bundlephobia.com/result?p=use-sound@0.3.0) [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![NPM version](https://img.shields.io/npm/v/use-sound)](https://www.npmjs.com/package/use-sound) [![Code of Conduct](https://img.shields.io/badge/Code%20of-conduct-d03eaf?style=flat)](https://github.com/tessel/project/blob/master/CONDUCT.md)
+[![Minified file size](https://img.badgesize.io/https://www.unpkg.com/use-sound/dist/use-sound.esm.js.svg)](https://bundlephobia.com/result?p=use-sound) [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![NPM version](https://img.shields.io/npm/v/use-sound)](https://www.npmjs.com/package/use-sound) [![Code of Conduct](https://img.shields.io/badge/Code%20of-conduct-d03eaf?style=flat)](https://github.com/joshwcomeau/use-sound/blob/master/CONDUCT.md)
 
 ---
 
@@ -34,9 +34,11 @@ UMD build available on [unpkg](https://www.unpkg.com/browse/use-sound@0.3.0/dist
 
 ## Demo
 
-See the library in action on Storybook:
+**[The tutorial](https://joshwcomeau.com/react/announcing-use-sound-react-hook/)** includes many demos, as well as instructions for finding and preparing sound effects. It's a great place to start.
 
-// link
+You can also **[view the storybook](todo)**, which includes lots of quick examples.
+
+---
 
 ## Examples
 
