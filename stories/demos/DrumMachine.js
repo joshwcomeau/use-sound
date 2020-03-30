@@ -45,6 +45,7 @@ function DrumMachine() {
 
   return (
     <>
+      <h2>Drum machine</h2>
       <PressyButton aria-label="kick" onMouseDown={() => play({ id: 'kick' })}>
         1
       </PressyButton>
@@ -66,6 +67,11 @@ function DrumMachine() {
       >
         4
       </PressyButton>
+      <p>
+        You can also use your keyboard!
+        <br />
+        Type "1" through "4".
+      </p>
     </>
   );
 }

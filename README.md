@@ -36,7 +36,7 @@ UMD build available on [unpkg](https://www.unpkg.com/browse/use-sound@0.3.0/dist
 
 **[The tutorial](https://joshwcomeau.com/react/announcing-use-sound-react-hook/)** includes many demos, as well as instructions for finding and preparing sound effects. It's a great place to start.
 
-You can also **[view the storybook](todo)**, which includes lots of quick examples.
+You can also **[view the storybook](https://use-sound.netlify.com/)**, which includes lots of quick examples.
 
 ---
 
@@ -124,11 +124,11 @@ For the user's sake, browsers don't allow websites to produce sound until the us
 
 `useSound` takes advantage of this: because we know that sounds won't be needed immediately on-load, we can lazy-load a third-party dependency.
 
-`useSound` will add about 800 bytes gzip to your bundle, and will asynchronously fetch an additional package after load, which clocks in around 9kb gzip.
+`useSound` will add about 1kb gzip to your bundle, and will asynchronously fetch an additional package after load, which clocks in around 9kb gzip.
 
 If the user does happen to click with something that makes noise before this dependency has been loaded and fetched, it will be a no-op (everything will still work, but no sound effect will play). In my experience this is exceedingly rare.
 
-### Respects changes to values
+### Reactive configuration
 
 Consider the following snippet of code:
 
@@ -171,9 +171,11 @@ When calling `useSound`, you can pass it a variety of options:
 | sprite       | SpriteMap |
 | [delegated]  | —         |
 
+- `volume` is a number from `0` to `1`, where `1` is full volume and `0` is comletely muted.
+- `playbackRate` is a number from `0.5` to `4`. It can be used to slow down or speed up the sample. Like a turntable, changes to speed also affect pitch.
 - `interrupt` specifies whether or not the sound should be able to "overlap" if the `play` function is called again before the sound has ended.
 - `soundEnabled` allows you to pass a value (typically from context or redux or something) to mute all sounds. Note that this can be overridden in the `PlayOptions`, see below
-- `sprite` allows you to use a single `useSound` hook for multiple sound effects. See "Advanced" below.
+- `sprite` allows you to use a single `useSound` hook for multiple sound effects. See [“Sprites”](https://github.com/joshwcomeau/use-sound#sprites) below.
 
 `[delegated]` refers to the fact that any additional argument you pass in `HookOptions` will be forwarded to the `Howl` constructor. See "Escape hatches" below for more information.
 
@@ -194,8 +196,8 @@ You can call this function without any arguments when you want to trigger the so
 | forceSoundEnabled | boolean |
 | playbackRate      | number  |
 
-- `id` is used for sprite identification. See "Advanced" below.
-- `forceSoundEnabled` allows you to override the `soundEnabled` boolean passed to `HookOptions`. You generally never want to do this. The only exception I've found: playing a sound when you click the "Disable sound" button. I like to play a little “powering off” sound effect, and I don't want it to be muted.
+- `id` is used for sprite identification. See [“Sprites”](https://github.com/joshwcomeau/use-sound#sprites) below.
+- `forceSoundEnabled` allows you to override the `soundEnabled` boolean passed to `HookOptions`. You generally never want to do this. The only exception I've found: triggering a sound on the "Mute" button.
 - `playbackRate` is another way you can set a new playback rate, same as in `HookOptions`. In general you should prefer to do it through `HookOptions`, this is an escape hatch.
 
 ### ExposedData
@@ -227,9 +229,9 @@ const [play, exposedData] = useSound('/meow.mp3');
 
 ### Sprites
 
-An audio sprite is a single audio file that holds multiple samples. If a page on your site uses 20 different audio files, it can be a performance win to combine them all into a single file, and to slice up that file into individually-playable sounds.
+An audio sprite is a single audio file that holds multiple samples. Instead of loading many individual sounds, you can load a single file and slice it up into multiple sections which can be triggered independently.
 
-> You probably don't need to use sprites! The only real benefit to this is performance, and technologies like HTTP/2 are making this a moot point.
+> There can be a performance benefit to this, since it's less parallel network requests, but it can also be worth doing this if a single component needs multiple samples. See the [Drum Machine story](https://github.com/joshwcomeau/use-sound/blob/master/stories/demos/DrumMachine.js) for an example.
 
 For sprites, we'll need to define a `SpriteMap`. It looks like this:
 
