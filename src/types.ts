@@ -17,7 +17,7 @@ export interface PlayOptions {
   playbackRate?: number;
 }
 
-export type PlayFunction = (options: PlayOptions) => void;
+export type PlayFunction = (options?: PlayOptions) => void;
 
 export interface ExposedData {
   sound: Howl | null;
