@@ -49,7 +49,7 @@ export default function useSound(
 
         setSound(sound);
       }
-    });
+    };
 
     loadHowler();
 
