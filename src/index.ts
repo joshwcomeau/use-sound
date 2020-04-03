@@ -56,7 +56,7 @@ export default function useSound(
     return () => {
       isCancelled = true;
     };
-  });
+  }, []);
 
   // When the URL changes, we have to do a whole thing where we recreate
   // the Howl instance. This is because Howler doesn't expose a way to
