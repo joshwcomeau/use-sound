@@ -3,6 +3,7 @@
   "author": "Josh Comeau",
   "module": "dist/use-sound.esm.js",
   "version": "1.0.1",
+  "repository": "github:joshwcomeau/use-sound",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
