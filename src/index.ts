@@ -40,6 +40,7 @@ export default function useSound(
       const sound = new HowlConstructor.current({
         src: [url],
         volume,
+        rate: playbackRate,
         onload: handleLoad,
         ...delegated,
       });
