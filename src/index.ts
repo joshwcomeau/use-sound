@@ -88,7 +88,7 @@ export default function useSound(
         options = {};
       }
 
-      if (!sound || (!soundEnabled && !options.forceSoundEnabled)) {
+      if (!sound || (options.forceSoundEnabled == undefined && !soundEnabled) || (options.forceSoundEnabled != undefined && !options.forceSoundEnabled)) {
         return;
       }
 
