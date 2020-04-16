@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+
+import useOnMount from './use-on-mount';
 
 import { HookOptions, PlayOptions, PlayFunction, ReturnedValue } from './types';
 
@@ -31,32 +33,29 @@ export default function useSound(
   };
 
   // We want to lazy-load Howler, since sounds can't play on load anyway.
-  useEffect(() => {
+  useOnMount(() => {
     let isCancelled:boolean = false;
+    (() => {
+      import('howler').then(mod => {
+        if (!isCancelled) {
+          HowlConstructor.current = mod.Howl;
 
-    const loadHowler = async () => {
-      const mod = await import('howler');
-      // checking if the component was unmounted during the load of Howler...
-      if (!isCancelled) {
-        HowlConstructor.current = mod.Howl;
+          const sound = new HowlConstructor.current({
+            src: [url],
+            volume,
+            rate: playbackRate,
+            onload: handleLoad,
+            ...delegated,
+          });
 
-        const sound = new HowlConstructor.current({
-          src: [url],
-          volume,
-          onload: handleLoad,
-          ...delegated,
-        });
-
-        setSound(sound);
-      }
-    };
-
-    loadHowler();
-
+          setSound(sound);
+        }
+      });
+    })();
     return () => {
       isCancelled = true;
     };
-  }, []);
+  });
 
   // When the URL changes, we have to do a whole thing where we recreate
   // the Howl instance. This is because Howler doesn't expose a way to
