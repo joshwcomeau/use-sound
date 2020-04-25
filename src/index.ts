@@ -34,24 +34,23 @@ export default function useSound(
 
   // We want to lazy-load Howler, since sounds can't play on load anyway.
   useOnMount(() => {
-    let isCancelled:boolean = false;
-    (() => {
-      import('howler').then(mod => {
-        if (!isCancelled) {
-          HowlConstructor.current = mod.Howl;
+    let isCancelled = false;
 
-          const sound = new HowlConstructor.current({
-            src: [url],
-            volume,
-            rate: playbackRate,
-            onload: handleLoad,
-            ...delegated,
-          });
+    import('howler').then(mod => {
+      if (!isCancelled) {
+        HowlConstructor.current = mod.Howl;
 
-          setSound(sound);
-        }
-      });
-    })();
+        const sound = new HowlConstructor.current({
+          src: [url],
+          volume,
+          rate: playbackRate,
+          onload: handleLoad,
+          ...delegated,
+        });
+
+        setSound(sound);
+      }
+    });
     return () => {
       isCancelled = true;
     };
