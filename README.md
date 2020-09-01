@@ -308,7 +308,3 @@ const Arcade = () => {
   );
 };
 ```
-
-## React Native
-
-A React Native implementation exists by the name of 
