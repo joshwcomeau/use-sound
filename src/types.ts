@@ -2,7 +2,24 @@ export type SpriteMap = {
   [key: string]: [number, number];
 };
 
-export interface HookOptions {
+export interface IHowlProperties {
+  autoplay?: boolean;
+  buffer?: boolean;
+  duration?: number;
+  format?: string;
+  loop?: boolean;
+  src?: string;
+  volume?: number;
+  urls?: string[];
+  rate?: number;
+  model?: 'equalpower' | 'HRTF';
+  onend?: Function;
+  onloaderror?: Function;
+  onpause?: Function;
+  onplay?: Function;
+}
+
+export interface HookOptions extends IHowlProperties {
   volume?: number;
   playbackRate?: number;
   interrupt?: boolean;
