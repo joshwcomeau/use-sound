@@ -268,7 +268,7 @@ To play a specific sprite, we'll pass its `id` when calling the `play` function:
 
 ```js
 <button
-  onClick={() => play('laser')}
+  onClick={() => play({id: 'laser')}
 >
 ```
 
