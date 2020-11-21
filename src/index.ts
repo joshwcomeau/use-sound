@@ -110,7 +110,12 @@ export default function useSound(
 
       sound.play(options.id);
 
-      sound.once('end', () => setIsPlaying(false));
+      sound.once('end', () => {
+        // If sound is not looping
+        if (!sound.playing()) {
+          setIsPlaying(false);
+        }
+      });
 
       setIsPlaying(true);
     },
