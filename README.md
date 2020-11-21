@@ -10,6 +10,8 @@ The web needs more (tasteful) sounds!
 - ✨ Built with Typescript
 - 🗣 Uses a powerful, battle-tested audio utility: **Howler.js**
 
+Looking for React Native? Check out [react-native-use-sound](https://github.com/remigallego/react-native-use-sound).
+
 [![Minified file size](https://img.badgesize.io/https://www.unpkg.com/use-sound/dist/use-sound.esm.js.svg)](https://bundlephobia.com/result?p=use-sound) [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![NPM version](https://img.shields.io/npm/v/use-sound)](https://www.npmjs.com/package/use-sound) [![Code of Conduct](https://img.shields.io/badge/Code%20of-conduct-d03eaf?style=flat)](https://github.com/joshwcomeau/use-sound/blob/master/CONDUCT.md)
 
 ---
