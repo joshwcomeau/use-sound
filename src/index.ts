@@ -16,6 +16,7 @@ export default function useSound(
   }: HookOptions = {}
 ) {
   const HowlConstructor = React.useRef<HowlStatic | null>(null);
+  const isMounted = React.useRef(false);
 
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [duration, setDuration] = React.useState<number | null>(null);
@@ -28,17 +29,18 @@ export default function useSound(
       onload.call(this);
     }
 
-    // @ts-ignore
-    setDuration(this.duration() * 1000);
+    if (isMounted.current) {
+      // @ts-ignore
+      setDuration(this.duration() * 1000);
+    }
   };
 
   // We want to lazy-load Howler, since sounds can't play on load anyway.
   useOnMount(() => {
-    let isCancelled = false;
-
     import('howler').then(mod => {
-      if (!isCancelled) {
+      if (!isMounted.current) {
         HowlConstructor.current = mod.Howl;
+        isMounted.current = true;
 
         const sound = new HowlConstructor.current({
           src: [url],
@@ -51,8 +53,9 @@ export default function useSound(
         setSound(sound);
       }
     });
+
     return () => {
-      isCancelled = true;
+      isMounted.current = false;
     };
   });
 
@@ -110,14 +113,18 @@ export default function useSound(
 
       sound.play(options.id);
 
-      sound.once('end', () => {
-        // If sound is not looping
-        if (!sound.playing()) {
-          setIsPlaying(false);
-        }
-      });
+      if (isMounted.current) {
+        sound.once('end', () => {
+          // If sound is not looping
+          if (!sound.playing()) {
+            setIsPlaying(false);
+          }
+        });
+      }
 
-      setIsPlaying(true);
+      if (isMounted.current) {
+        setIsPlaying(true);
+      }
     },
     [sound, soundEnabled, interrupt]
   );
@@ -128,7 +135,10 @@ export default function useSound(
         return;
       }
       sound.stop(id);
-      setIsPlaying(false);
+
+      if (isMounted.current) {
+        setIsPlaying(false);
+      }
     },
     [sound]
   );
@@ -139,7 +149,10 @@ export default function useSound(
         return;
       }
       sound.pause(id);
-      setIsPlaying(false);
+
+      if (isMounted.current) {
+        setIsPlaying(false);
+      }
     },
     [sound]
   );
