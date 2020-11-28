@@ -35,3 +35,9 @@ export declare const DrumMachine: {
         name: string;
     };
 };
+export declare const MultipleSources: {
+    (): JSX.Element;
+    story: {
+        name: string;
+    };
+};
