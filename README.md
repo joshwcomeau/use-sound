@@ -8,11 +8,21 @@ The web needs more (tasteful) sounds!
 - 🔥 Declarative Hooks API
 - ⚡️ <1kb bytes (gzip) in your bundle! ~10kb loaded async.
 - ✨ Built with Typescript
-- 🗣 Uses a powerful, battle-tested audio utility: **Howler.js**
+- 🗣 Uses a powerful, battle-tested audio utility: [**Howler.js**](https://howlerjs.com/)
 
 [![Minified file size](https://img.badgesize.io/https://www.unpkg.com/use-sound/dist/use-sound.esm.js.svg)](https://bundlephobia.com/result?p=use-sound) [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![NPM version](https://img.shields.io/npm/v/use-sound)](https://www.npmjs.com/package/use-sound) [![Code of Conduct](https://img.shields.io/badge/Code%20of-conduct-d03eaf?style=flat)](https://github.com/joshwcomeau/use-sound/blob/master/CONDUCT.md)
 
 This library only works with React DOM, but @remigallego created an alternative for React Native! Check out [react-native-use-sound](https://github.com/remigallego/react-native-use-sound).
+
+---
+
+## Status
+
+This project is “semi-maintained” 😅
+
+I don't have the bandwidth right now to look into edge-case issues or help troubleshoot, but I plan on keeping it up-to-date with major React releases, and fixing issues that are both serious and common.
+
+If you have ideas for features, or run into strange quirks, I thoroughly recommend forking the project and making it your own! It might seem intimidating, but the source isn't as complex as many other NPM packages; I defer all the hard audio work to [Howler](https://howlerjs.com/)). If you've been using React for a while and are comfortable with hooks, you should feel right at home with this package's code.
 
 ---
 
