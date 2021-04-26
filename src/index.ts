@@ -5,7 +5,7 @@ import useOnMount from './use-on-mount';
 import { HookOptions, PlayOptions, PlayFunction, ReturnedValue } from './types';
 
 export default function useSound<T = any>(
-  url: string,
+  src: string | string[],
   {
     volume = 1,
     playbackRate = 1,
@@ -43,7 +43,7 @@ export default function useSound<T = any>(
         isMounted.current = true;
 
         const sound = new HowlConstructor.current({
-          src: [url],
+          src: Array.isArray(src) ? src : [src],
           volume,
           rate: playbackRate,
           onload: handleLoad,
@@ -59,14 +59,14 @@ export default function useSound<T = any>(
     };
   });
 
-  // When the URL changes, we have to do a whole thing where we recreate
+  // When the `src` changes, we have to do a whole thing where we recreate
   // the Howl instance. This is because Howler doesn't expose a way to
   // tweak the sound
   React.useEffect(() => {
     if (HowlConstructor.current && sound) {
       setSound(
         new HowlConstructor.current({
-          src: [url],
+          src: Array.isArray(src) ? src : [src],
           volume,
           onload: handleLoad,
           ...delegated,
@@ -75,9 +75,12 @@ export default function useSound<T = any>(
     }
     // The linter wants to run this effect whenever ANYTHING changes,
     // but very specifically I only want to recreate the Howl instance
-    // when the `url` changes. Other changes should have no effect.
+    // when the `src` changes. Other changes should have no effect.
+    // Passing array to the useEffect dependencies list will result in
+    // ifinite loop so we need to stringify it, for more details check
+    // https://github.com/facebook/react/issues/14476#issuecomment-471199055
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url]);
+  }, [JSON.stringify(src)]);
 
   // Whenever volume/playbackRate are changed, change those properties
   // on the sound instance.

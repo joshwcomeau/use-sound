@@ -1,6 +1,6 @@
 import { HookOptions, ReturnedValue } from './types';
 export default function useSound(
-  url: string,
+  src: string | string[],
   {
     volume,
     playbackRate,
