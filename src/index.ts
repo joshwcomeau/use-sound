@@ -4,7 +4,7 @@ import useOnMount from './use-on-mount';
 
 import { HookOptions, PlayOptions, PlayFunction, ReturnedValue } from './types';
 
-export default function useSound(
+export default function useSound<T = any>(
   src: string | string[],
   {
     volume = 1,
@@ -13,7 +13,7 @@ export default function useSound(
     interrupt = false,
     onload,
     ...delegated
-  }: HookOptions = {}
+  }: HookOptions<T> = {} as HookOptions
 ) {
   const HowlConstructor = React.useRef<HowlStatic | null>(null);
   const isMounted = React.useRef(false);
@@ -173,3 +173,5 @@ export default function useSound(
 
   return returnedValue;
 }
+
+export { useSound };
