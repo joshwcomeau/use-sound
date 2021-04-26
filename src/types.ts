@@ -2,14 +2,14 @@ export type SpriteMap = {
   [key: string]: [number, number];
 };
 
-export interface HookOptions {
+export type HookOptions<T = any> = T & {
   volume?: number;
   playbackRate?: number;
   interrupt?: boolean;
   soundEnabled?: boolean;
   sprite?: SpriteMap;
   onload?: () => void;
-}
+};
 
 export interface PlayOptions {
   id?: string;

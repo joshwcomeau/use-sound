@@ -27,16 +27,4 @@ If you encounter a problem with this library, please open an issue. Be sure to i
 - Brief but thorough description of the issue
 - Link to a CodeSandbox (or similar) demonstrating the problem (optional, but highly recommended, especially for complex problems)
 
-It may take several days before you get a response. This project is maintained by 1 very-busy person.
-
-## Improvements and Enhancements
-
-As discussed above, I am resistant to expanding the scope of this project. I consider this "done-ish". I'm not super interested in adding additional cool audio functionality, though I'd encourage you to build this yourself and release it separately!
-
-There is one area I would be very grateful to have contributions, and it's around infrastructure. Things like:
-
-- Improving bundling to reduce file-size
-- Adding tests
-- Managing the Typescript types
-
-If you see room for improvement in these areas and are interested in contributing, please open an issue and let's discuss!
+I can't promise that I'll respond to all opened issues. I'm focused right now on launching my own business.
