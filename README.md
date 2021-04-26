@@ -130,6 +130,38 @@ export const RisingPitch = () => {
 
 ## Usage Notes
 
+### Importing/sourcing audio files
+
+`useSound` requires a path to an audio file, and it isn't obvious how to provide one in a React application.
+
+Using `create-react-app`, you can "import" an MP3 file. It will resolve to a dynamically-generated path:
+
+```js
+import someAudioFile from '../sounds/sound.mp3';
+
+console.log(someAudioFile); // “/build/sounds/sound-abc123.mp3”
+```
+
+If you try to pull this trick in another React build system like Next.js, you may get an error like this:
+
+> You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file.
+
+The problem is that Webpack (the bundler used under-the-hood to generate JS bundles) doesn't know how to process an MP3 file.
+
+If you have access to the Webpack config, you can update it to use [file-loader](https://webpack.js.org/loaders/file-loader/), which will create a dynamic, publicly-accessible path to the file.
+
+Alternatively, most tools will give you a "public" (create-react-app, Next.js) or a "static" (Gatsby) folder. You can drop your audio files in there, and then use a string path:
+
+```js
+const someAudioFile = '/public/sounds/sound.mp3';
+```
+
+The sound files you'll use with `use-sound` follow the same rules as other static assets like images or fonts. Follow the guides for your meta-framework of choice:
+
+- [create-react-app](https://create-react-app.dev/docs/adding-images-fonts-and-files/)
+- [Next.js](https://nextjs.org/docs/basic-features/static-file-serving)
+- [Gatsby](https://www.gatsbyjs.com/docs/how-to/images-and-media/static-folder/)
+
 ### No sounds immediately after load
 
 For the user's sake, browsers don't allow websites to produce sound until the user has interacted with them (eg. by clicking on something). No sound will be produced until the user clicks, taps, or triggers something.
