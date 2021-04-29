@@ -7,7 +7,7 @@
     "import": "./dist/use-sound.esm.js",
     "require": "./dist/index.js"
   },
-  "version": "2.1.0",
+  "version": "2.1.1",
   "repository": "github:joshwcomeau/use-sound",
   "license": "MIT",
   "main": "dist/index.js",
