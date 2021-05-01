@@ -1,8 +1,13 @@
 {
   "name": "use-sound",
   "author": "Josh Comeau",
+  "version": "3.0.0",
   "module": "dist/use-sound.esm.js",
-  "version": "2.2.0",
+  "type": "module",
+  "exports": {
+    "import": "./dist/use-sound.esm.js",
+    "require": "./dist/index.js"
+  },
   "repository": "github:joshwcomeau/use-sound",
   "license": "MIT",
   "main": "dist/index.js",
