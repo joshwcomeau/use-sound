@@ -83,7 +83,7 @@ const FanfareButton = () => {
   const [play, { stop }] = useSound(fanfareSfx);
 
   return (
-    <button onMouseEnter={play} onMouseLeave={stop}>
+    <button onMouseEnter={() => play()} onMouseLeave={() => stop()}>
       <span role="img" aria-label="trumpet">
         🎺
       </span>
