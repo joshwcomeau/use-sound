@@ -20,7 +20,6 @@ export interface ExposedData {
   sound: Howl | null;
   stop: (id?: string) => void;
   pause: (id?: string) => void;
-  isPlaying: boolean;
   duration: number | null;
 }
 export declare type ReturnedValue = [PlayFunction, ExposedData];

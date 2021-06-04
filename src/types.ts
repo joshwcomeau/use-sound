@@ -3,6 +3,7 @@ export type SpriteMap = {
 };
 
 export type HookOptions<T = any> = T & {
+  id?: string;
   volume?: number;
   playbackRate?: number;
   interrupt?: boolean;
@@ -23,7 +24,6 @@ export interface ExposedData {
   sound: Howl | null;
   stop: (id?: string) => void;
   pause: (id?: string) => void;
-  isPlaying: boolean;
   duration: number | null;
 }
 

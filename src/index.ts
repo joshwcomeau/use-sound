@@ -7,6 +7,7 @@ import { HookOptions, PlayOptions, PlayFunction, ReturnedValue } from './types';
 export default function useSound<T = any>(
   src: string | string[],
   {
+    id,
     volume = 1,
     playbackRate = 1,
     soundEnabled = true,
@@ -18,7 +19,6 @@ export default function useSound<T = any>(
   const HowlConstructor = React.useRef<HowlStatic | null>(null);
   const isMounted = React.useRef(false);
 
-  const [isPlaying, setIsPlaying] = React.useState(false);
   const [duration, setDuration] = React.useState<number | null>(null);
 
   const [sound, setSound] = React.useState<Howl | null>(null);
@@ -33,6 +33,9 @@ export default function useSound<T = any>(
       // @ts-ignore
       setDuration(this.duration() * 1000);
     }
+
+    // @ts-ignore
+    setSound(this);
   };
 
   // We want to lazy-load Howler, since sounds can't play on load anyway.
@@ -42,15 +45,13 @@ export default function useSound<T = any>(
         HowlConstructor.current = mod.Howl;
         isMounted.current = true;
 
-        const sound = new HowlConstructor.current({
+        new HowlConstructor.current({
           src: Array.isArray(src) ? src : [src],
           volume,
           rate: playbackRate,
           onload: handleLoad,
           ...delegated,
         });
-
-        setSound(sound);
       }
     });
 
@@ -115,19 +116,6 @@ export default function useSound<T = any>(
       }
 
       sound.play(options.id);
-
-      if (isMounted.current) {
-        sound.once('end', () => {
-          // If sound is not looping
-          if (!sound.playing()) {
-            setIsPlaying(false);
-          }
-        });
-      }
-
-      if (isMounted.current) {
-        setIsPlaying(true);
-      }
     },
     [sound, soundEnabled, interrupt]
   );
@@ -138,10 +126,6 @@ export default function useSound<T = any>(
         return;
       }
       sound.stop(id);
-
-      if (isMounted.current) {
-        setIsPlaying(false);
-      }
     },
     [sound]
   );
@@ -152,10 +136,6 @@ export default function useSound<T = any>(
         return;
       }
       sound.pause(id);
-
-      if (isMounted.current) {
-        setIsPlaying(false);
-      }
     },
     [sound]
   );
@@ -166,7 +146,6 @@ export default function useSound<T = any>(
       sound,
       stop,
       pause,
-      isPlaying,
       duration,
     },
   ];

@@ -9,6 +9,7 @@ import HoverDemo from './demos/Hover';
 import RisingDemo from './demos/Rising';
 import DrumMachineDemo from './demos/DrumMachine';
 import MultipleSourcesDemo from './demos/SimpleMultipleSources';
+import ShowWhilePlayingDemo from './demos/ShowWhilePlaying';
 
 import 'focus-visible';
 
@@ -27,8 +28,6 @@ Simple.story = {
 
 export const Checkbox = () => (
   <div style={{ display: 'flex', width: 160, justifyContent: 'space-between' }}>
-    <CheckboxDemo />
-    <CheckboxDemo />
     <CheckboxDemo />
   </div>
 );
@@ -64,12 +63,20 @@ DrumMachine.story = {
 export const MultipleSources = () => {
   const options = {
     'wav/mp3': 'wav_mp3',
-    'mp3/wav': 'mp3_wav'
+    'mp3/wav': 'mp3_wav',
   };
   const value = radios('Source', options, 'wav_mp3', 'group1');
-  return <MultipleSourcesDemo order={value}/>;
+  return <MultipleSourcesDemo order={value} />;
 };
 
 MultipleSources.story = {
   name: 'Multiple sources support',
+};
+
+export const ShowWhilePlaying = () => {
+  return <ShowWhilePlayingDemo />;
+};
+
+ShowWhilePlaying.story = {
+  name: 'With Howler events (show while playing)',
 };

@@ -253,17 +253,15 @@ const [play, exposedData] = useSound('/meow.mp3');
 //                ^ What we're talking about
 ```
 
-| Name      | Value                            |
-| --------- | -------------------------------- |
-| stop      | function ((id?: string) => void) |
-| pause     | function ((id?: string) => void) |
-| isPlaying | boolean                          |
-| duration  | number (or null)                 |
-| sound     | Howl (or null)                   |
+| Name     | Value                            |
+| -------- | -------------------------------- |
+| stop     | function ((id?: string) => void) |
+| pause    | function ((id?: string) => void) |
+| duration | number (or null)                 |
+| sound    | Howl (or null)                   |
 
 - `stop` is a function you can use to pre-emptively halt the sound.
 - `pause` is like `stop`, except it can be resumed from the same point. Unless you know you'll want to resume, you should use `stop`; `pause` hogs resources, since it expects to be resumed at some point.
-- `isPlaying` lets you know whether this sound is currently playing or not. When the sound reaches the end, or it's interrupted with `stop` or `paused`, this value will flip back to `false`. You can use this to show some UI only while the sound is playing.
 - `duration` is the length of the sample, in milliseconds. It will be `null` until the sample has been loaded. Note that for sprites, it's the length of the entire file.
 - `sound` is an escape hatch. It grants you access to the underlying `Howl` instance. See the [Howler documentation](https://github.com/goldfire/howler.js) to learn more about how to use it. Note that this will be `null` for the first few moments after the component mounts.
 

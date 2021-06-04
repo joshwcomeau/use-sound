@@ -13,9 +13,9 @@ const BORDER_WIDTH = 2;
 function CheckboxDemo() {
   const [isChecked, setIsChecked] = React.useState(false);
 
-  const [playActive] = useSound(popDown, { volume: 0.25 });
-  const [playOn] = useSound(popUpOn, { volume: 0.25 });
-  const [playOff] = useSound(popUpOff, { volume: 0.25 });
+  const [playActive] = useSound(popDown, { id: 'active', volume: 0.25 });
+  const [playOn] = useSound(popUpOn, { id: 'on', volume: 0.25 });
+  const [playOff] = useSound(popUpOff, { id: 'off', volume: 0.25 });
 
   return (
     <Checkbox
