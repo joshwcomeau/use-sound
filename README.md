@@ -150,11 +150,7 @@ The problem is that Webpack (the bundler used under-the-hood to generate JS bund
 
 If you have access to the Webpack config, you can update it to use [file-loader](https://webpack.js.org/loaders/file-loader/), which will create a dynamic, publicly-accessible path to the file.
 
-Alternatively, most tools will give you a "public" (create-react-app, Next.js) or a "static" (Gatsby) folder. You can drop your audio files in there, and then use a string path:
-
-```js
-const someAudioFile = '/public/sounds/sound.mp3';
-```
+Alternatively, most tools will give you a "public" (create-react-app, Next.js) or a "static" (Gatsby) folder. You can drop your audio files in there, and then use a string path.
 
 The sound files you'll use with `use-sound` follow the same rules as other static assets like images or fonts. Follow the guides for your meta-framework of choice:
 
