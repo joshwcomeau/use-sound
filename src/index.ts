@@ -42,12 +42,10 @@ export default function useSound<T = any>(
   useOnMount(() => {
     import('howler').then(mod => {
       if (!isMounted.current) {
-        if (typeof mod.Howl !== 'undefined') {
-          HowlConstructor.current = mod.Howl;
-        }
-        else {
-          HowlConstructor.current = mod.default.Howl;
-        }
+        // Depending on the module system used, `mod` might hold
+        // the export directly, or it might be under `default`.
+        HowlConstructor.current = mod.Howl ?? mod.default.Howl;
+
         isMounted.current = true;
 
         new HowlConstructor.current({
