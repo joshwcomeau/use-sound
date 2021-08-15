@@ -158,6 +158,9 @@ The sound files you'll use with `use-sound` follow the same rules as other stati
 - [Next.js](https://nextjs.org/docs/basic-features/static-file-serving)
 - [Gatsby](https://www.gatsbyjs.com/docs/how-to/images-and-media/static-folder/)
 
+> **⚠️ Async sound paths? ⚠️**
+> If the URL to your audio file is loaded asynchronously, you might run into [some problems](https://github.com/joshwcomeau/use-sound/issues/85). This probably isn't the right package for that usecase.
+
 ### No sounds immediately after load
 
 For the user's sake, browsers don't allow websites to produce sound until the user has interacted with them (eg. by clicking on something). No sound will be produced until the user clicks, taps, or triggers something.
