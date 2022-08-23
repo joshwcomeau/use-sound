@@ -4,3 +4,12 @@ node_modules
 .cache
 dist
 storybook-static
+
+# yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
