@@ -1,7 +1,7 @@
 import React from 'react';
-import { withKnobs, radios } from '@storybook/addon-knobs';
-
 import Wrapper from './helpers/Wrapper';
+
+import { StoryFn } from '@storybook/react';
 
 import CheckboxDemo from './demos/Checkbox';
 import SimpleDemo from './demos/Simple';
@@ -15,68 +15,57 @@ import 'focus-visible';
 
 export default {
   title: 'useSound',
-  decorators: [withKnobs, storyFn => <Wrapper>{storyFn()}</Wrapper>],
+  decorators: [storyFn => <Wrapper>{storyFn()}</Wrapper>],
 };
 
-export const Simple = () => {
+export const Simple: StoryFn = () => {
   return <SimpleDemo />;
 };
+Simple.storyName = 'Default';
 
-Simple.story = {
-  name: 'Default',
-};
-
-export const Checkbox = () => (
+export const Checkbox: StoryFn = () => (
   <div style={{ display: 'flex', width: 160, justifyContent: 'space-between' }}>
     <CheckboxDemo />
   </div>
 );
+Checkbox.storyName = 'Checkbox';
 
-Checkbox.story = {
-  name: 'Checkbox',
-};
-
-export const Hovering = () => {
+export const Hovering: StoryFn = () => {
   return <HoverDemo />;
 };
+Hovering.storyName = 'Play when hovering';
 
-Hovering.story = {
-  name: 'Play when hovering',
-};
-
-export const Rising = () => {
+export const Rising: StoryFn = () => {
   return <RisingDemo />;
 };
+Rising.storyName = 'Rising pitch';
 
-Rising.story = {
-  name: 'Rising pitch',
-};
-
-export const DrumMachine = () => {
+export const DrumMachine: StoryFn = () => {
   return <DrumMachineDemo />;
 };
+DrumMachine.storyName = 'Drum machine (sprites)';
 
-DrumMachine.story = {
-  name: 'Drum machine (sprites)',
+export const MultipleSources: StoryFn = ({ order }) => {
+  return <MultipleSourcesDemo order={order} />;
 };
-
-export const MultipleSources = () => {
-  const options = {
-    'wav/mp3': 'wav_mp3',
-    'mp3/wav': 'mp3_wav',
-  };
-  const value = radios('Source', options, 'wav_mp3', 'group1');
-  return <MultipleSourcesDemo order={value} />;
+MultipleSources.storyName = 'Multiple sources support';
+MultipleSources.args = {
+  order: 'wav_mp3',
 };
-
-MultipleSources.story = {
-  name: 'Multiple sources support',
+MultipleSources.argTypes = {
+  order: {
+    name: 'Source',
+    control: {
+      type: 'radio',
+      options: {
+        'wav/mp3': 'wav_mp3',
+        'mp3/wav': 'mp3_wav',
+      },
+    },
+  },
 };
 
 export const ShowWhilePlaying = () => {
   return <ShowWhilePlayingDemo />;
 };
-
-ShowWhilePlaying.story = {
-  name: 'With Howler events (show while playing)',
-};
+ShowWhilePlaying.storyName = 'With Howler events (show while playing)';
