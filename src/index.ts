@@ -1,8 +1,8 @@
 import React from 'react';
-
 import useOnMount from './use-on-mount';
-
 import { HookOptions, PlayOptions, PlayFunction, ReturnedValue } from './types';
+
+import type { Howl } from 'howler';
 
 export default function useSound<T = any>(
   src: string | string[],
@@ -16,25 +16,22 @@ export default function useSound<T = any>(
     ...delegated
   }: HookOptions<T> = {} as HookOptions
 ) {
-  const HowlConstructor = React.useRef<HowlStatic | null>(null);
+  const HowlConstructor = React.useRef<typeof Howl | null>(null);
   const isMounted = React.useRef(false);
 
   const [duration, setDuration] = React.useState<number | null>(null);
 
   const [sound, setSound] = React.useState<Howl | null>(null);
 
-  const handleLoad = function() {
+  const handleLoad = function(this: Howl) {
     if (typeof onload === 'function') {
-      // @ts-ignore
       onload.call(this);
     }
 
     if (isMounted.current) {
-      // @ts-ignore
       setDuration(this.duration() * 1000);
     }
 
-    // @ts-ignore
     setSound(this);
   };
 
@@ -124,7 +121,7 @@ export default function useSound<T = any>(
   );
 
   const stop = React.useCallback(
-    id => {
+    (id?: number) => {
       if (!sound) {
         return;
       }
@@ -134,7 +131,7 @@ export default function useSound<T = any>(
   );
 
   const pause = React.useCallback(
-    id => {
+    (id?: number) => {
       if (!sound) {
         return;
       }

@@ -1,4 +1,5 @@
-/// <reference types="howler" />
+import type { Howl } from 'howler';
+
 export declare type SpriteMap = {
   [key: string]: [number, number];
 };
@@ -17,7 +18,7 @@ export interface PlayOptions {
 }
 export declare type PlayFunction = (options: PlayOptions) => void;
 export interface ExposedData {
-  sound: Howl | null;
+  sound: typeof Howl | null;
   stop: (id?: string) => void;
   pause: (id?: string) => void;
   duration: number | null;
