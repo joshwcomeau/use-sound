@@ -1,7 +1,7 @@
 {
   "name": "use-sound",
   "author": "Josh Comeau",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "module": "dist/use-sound.esm.js",
   "exports": {
     "import": "./dist/use-sound.esm.js",
