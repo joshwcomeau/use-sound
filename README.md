@@ -214,7 +214,7 @@ When calling `useSound`, you can pass it a variety of options:
 | sprite       | SpriteMap |
 | [delegated]  | —         |
 
-- `volume` is a number from `0` to `1`, where `1` is full volume and `0` is comletely muted.
+- `volume` is a number from `0` to `1`, where `1` is full volume and `0` is completely muted.
 - `playbackRate` is a number from `0.5` to `4`. It can be used to slow down or speed up the sample. Like a turntable, changes to speed also affect pitch.
 - `interrupt` specifies whether or not the sound should be able to "overlap" if the `play` function is called again before the sound has ended.
 - `soundEnabled` allows you to pass a value (typically from context or redux or something) to mute all sounds. Note that this can be overridden in the `PlayOptions`, see below
