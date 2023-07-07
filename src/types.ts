@@ -1,4 +1,4 @@
-import type { Howl } from "howler";
+import type { Howl } from 'howler';
 
 export type SpriteMap = {
   [key: string]: [number, number];

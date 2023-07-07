@@ -23,7 +23,7 @@ export default function useSound<T = any>(
 
   const [sound, setSound] = React.useState<Howl | null>(null);
 
-  const handleLoad = function(this: Howl) {
+  const handleLoad = function (this: Howl) {
     if (typeof onload === 'function') {
       onload.call(this);
     }
@@ -37,7 +37,7 @@ export default function useSound<T = any>(
 
   // We want to lazy-load Howler, since sounds can't play on load anyway.
   useOnMount(() => {
-    import('howler').then(mod => {
+    import('howler').then((mod) => {
       if (!isMounted.current) {
         // Depending on the module system used, `mod` might hold
         // the export directly, or it might be under `default`.
