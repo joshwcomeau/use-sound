@@ -42,6 +42,12 @@ npm install use-sound
 
 UMD build available on [unpkg](https://www.unpkg.com/browse/use-sound@0.3.0/dist/use-sound.cjs.production.min.js).
 
+### TypeScript support
+
+This library is fully typed in TypeScript, but getting your project to acknowledge these types is a bit tricky. [akhil0001 shared a solution](https://github.com/joshwcomeau/use-sound/issues/135#issuecomment-1723305858) that works great. You might also need to add `@types/howler` as a dev dependency.
+
+Sorry for the trouble — there is an easy fix, but it breaks CommonJS, and I'm not enough of a Node expert to know how to support both _and_ TypeScript out of the box. 😅
+
 ---
 
 ## Demo
