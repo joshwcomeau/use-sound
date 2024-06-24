@@ -42,11 +42,7 @@ npm install use-sound
 
 UMD build available on [unpkg](https://www.unpkg.com/browse/use-sound@0.3.0/dist/use-sound.cjs.production.min.js).
 
-### TypeScript support
-
-This library is fully typed in TypeScript, but getting your project to acknowledge these types is a bit tricky. [akhil0001 shared a solution](https://github.com/joshwcomeau/use-sound/issues/135#issuecomment-1723305858) that works great. You might also need to add `@types/howler` as a dev dependency.
-
-Sorry for the trouble — there is an easy fix, but it breaks CommonJS, and I'm not enough of a Node expert to know how to support both _and_ TypeScript out of the box. 😅
+If your project uses TypeScript, you should also install the `@types/howler` package as a dev dependency.
 
 ---
 
@@ -220,7 +216,7 @@ When calling `useSound`, you can pass it a variety of options:
 | sprite       | SpriteMap |
 | [delegated]  | —         |
 
-- `volume` is a number from `0` to `1`, where `1` is full volume and `0` is completely muted.
+- `volume` is a number from `0` to `1`, where `1` is full volume and `0` is comletely muted.
 - `playbackRate` is a number from `0.5` to `4`. It can be used to slow down or speed up the sample. Like a turntable, changes to speed also affect pitch.
 - `interrupt` specifies whether or not the sound should be able to "overlap" if the `play` function is called again before the sound has ended.
 - `soundEnabled` allows you to pass a value (typically from context or redux or something) to mute all sounds. Note that this can be overridden in the `PlayOptions`, see below
