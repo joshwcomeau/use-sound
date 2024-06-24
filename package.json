@@ -4,6 +4,7 @@
   "version": "4.0.1",
   "module": "dist/use-sound.esm.js",
   "exports": {
+    "types": "./dist/index.d.ts",
     "import": "./dist/use-sound.esm.js",
     "require": "./dist/index.js"
   },
