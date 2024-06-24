@@ -8,6 +8,7 @@ export interface HookOptions {
   interrupt?: boolean;
   soundEnabled?: boolean;
   sprite?: SpriteMap;
+  skip?: boolean;
   onload?: () => void;
 }
 export interface PlayOptions {

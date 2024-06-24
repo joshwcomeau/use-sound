@@ -7,6 +7,7 @@ export default function useSound(
     soundEnabled,
     interrupt,
     onload,
+    skip,
     ...delegated
   }?: HookOptions
 ): ReturnedValue;

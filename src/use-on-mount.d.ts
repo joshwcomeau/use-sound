@@ -1,2 +1,6 @@
-import * as React from 'react';
-export default function useOnMount(callback: React.EffectCallback): void;
+import { EffectCallback, DependencyList } from 'react';
+declare const useOnMount: (
+  callback: EffectCallback,
+  deps?: DependencyList
+) => void;
+export default useOnMount;

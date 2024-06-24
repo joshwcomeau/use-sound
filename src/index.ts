@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useOnMount from './use-on-mount';
+import useMount from 'use-mount';
 
 import { HookOptions, PlayOptions, PlayFunction, ReturnedValue } from './types';
 
@@ -13,11 +13,11 @@ export default function useSound<T = any>(
     soundEnabled = true,
     interrupt = false,
     onload,
+    skip = false,
     ...delegated
   }: HookOptions<T> = {} as HookOptions
 ) {
   const HowlConstructor = React.useRef<HowlStatic | null>(null);
-  const isMounted = React.useRef(false);
 
   const [duration, setDuration] = React.useState<number | null>(null);
 
@@ -29,7 +29,7 @@ export default function useSound<T = any>(
       onload.call(this);
     }
 
-    if (isMounted.current) {
+    if (isMounted) {
       // @ts-ignore
       setDuration(this.duration() * 1000);
     }
@@ -39,29 +39,22 @@ export default function useSound<T = any>(
   };
 
   // We want to lazy-load Howler, since sounds can't play on load anyway.
-  useOnMount(() => {
-    import('howler').then(mod => {
-      if (!isMounted.current) {
-        // Depending on the module system used, `mod` might hold
-        // the export directly, or it might be under `default`.
-        HowlConstructor.current = mod.Howl ?? mod.default.Howl;
+  const { isMounted } = useMount(async () => {
+    if (!skip) {
+      const mod = await import('howler');
+      // Depending on the module system used, `mod` might hold
+      // the export directly, or it might be under `default`.
+      HowlConstructor.current = mod.Howl ?? mod.default.Howl;
 
-        isMounted.current = true;
-
-        new HowlConstructor.current({
-          src: Array.isArray(src) ? src : [src],
-          volume,
-          rate: playbackRate,
-          onload: handleLoad,
-          ...delegated,
-        });
-      }
-    });
-
-    return () => {
-      isMounted.current = false;
-    };
-  });
+      new HowlConstructor.current({
+        src: Array.isArray(src) ? src : [src],
+        volume,
+        rate: playbackRate,
+        onload: handleLoad,
+        ...delegated,
+      });
+    }
+  }, [skip]);
 
   // When the `src` changes, we have to do a whole thing where we recreate
   // the Howl instance. This is because Howler doesn't expose a way to
