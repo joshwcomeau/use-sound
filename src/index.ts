@@ -12,6 +12,7 @@ export default function useSound<T = any>(
     playbackRate = 1,
     soundEnabled = true,
     interrupt = false,
+    loop = false,
     onload,
     ...delegated
   }: HookOptions<T> = {} as HookOptions
@@ -53,6 +54,7 @@ export default function useSound<T = any>(
           volume,
           rate: playbackRate,
           onload: handleLoad,
+          loop,
           ...delegated,
         });
       }
@@ -73,6 +75,7 @@ export default function useSound<T = any>(
           src: Array.isArray(src) ? src : [src],
           volume,
           onload: handleLoad,
+          loop,
           ...delegated,
         })
       );
@@ -86,19 +89,20 @@ export default function useSound<T = any>(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(src)]);
 
-  // Whenever volume/playbackRate are changed, change those properties
+  // Whenever volume/playbackRate/loop are changed, change those properties
   // on the sound instance.
   React.useEffect(() => {
     if (sound) {
       sound.volume(volume);
       sound.rate(playbackRate);
+      sound.loop(loop);
     }
     // A weird bug means that including the `sound` here can trigger an
     // error on unmount, where the state loses track of the sprites??
     // No idea, but anyway I don't need to re-run this if only the `sound`
     // changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [volume, playbackRate]);
+  }, [volume, playbackRate, loop]);
 
   const play: PlayFunction = React.useCallback(
     (options?: PlayOptions) => {
