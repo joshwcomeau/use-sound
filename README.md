@@ -213,6 +213,7 @@ When calling `useSound`, you can pass it a variety of options:
 | playbackRate | number    |
 | interrupt    | boolean   |
 | soundEnabled | boolean   |
+| loop         | boolean   |
 | sprite       | SpriteMap |
 | [delegated]  | —         |
 
@@ -220,6 +221,7 @@ When calling `useSound`, you can pass it a variety of options:
 - `playbackRate` is a number from `0.5` to `4`. It can be used to slow down or speed up the sample. Like a turntable, changes to speed also affect pitch.
 - `interrupt` specifies whether or not the sound should be able to "overlap" if the `play` function is called again before the sound has ended.
 - `soundEnabled` allows you to pass a value (typically from context or redux or something) to mute all sounds. Note that this can be overridden in the `PlayOptions`, see below
+- `loop` wether or not the sound should loop until the `stop` function is called
 - `sprite` allows you to use a single `useSound` hook for multiple sound effects. See [“Sprites”](https://github.com/joshwcomeau/use-sound#sprites) below.
 
 `[delegated]` refers to the fact that any additional argument you pass in `HookOptions` will be forwarded to the `Howl` constructor. See "Escape hatches" below for more information.
