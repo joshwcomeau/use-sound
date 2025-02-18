@@ -50,7 +50,7 @@
     "eslint-plugin-react": "7.x",
     "eslint-plugin-react-hooks": "2.x",
     "focus-visible": "^5.0.2",
-    "husky": "^4.2.3",
+    "husky": "^9.1.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-spring": "^8.0.27",
@@ -62,11 +62,6 @@
   },
   "peerDependencies": {
     "react": ">=16.8"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
   },
   "prettier": {
     "printWidth": 80,
