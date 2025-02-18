@@ -91,7 +91,11 @@ export default function useSound<T = any>(
   React.useEffect(() => {
     if (sound) {
       sound.volume(volume);
-      sound.rate(playbackRate);
+
+      // HACK: When a sprite is defined, `sound.rate()` throws an error, because Howler tries to reset the "_default" sprite, which doesn't exist. This is likely a bug within Howler, but I don’t have the bandwidth to investigate, so instead, we’re ignoring playbackRate changes when a sprite is defined.
+      if (!delegated.sprite) {
+        sound.rate(playbackRate);
+      }
     }
   }, [sound, volume, playbackRate]);
 
