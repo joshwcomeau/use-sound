@@ -93,12 +93,7 @@ export default function useSound<T = any>(
       sound.volume(volume);
       sound.rate(playbackRate);
     }
-    // A weird bug means that including the `sound` here can trigger an
-    // error on unmount, where the state loses track of the sprites??
-    // No idea, but anyway I don't need to re-run this if only the `sound`
-    // changes.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [volume, playbackRate]);
+  }, [sound, volume, playbackRate]);
 
   const play: PlayFunction = React.useCallback(
     (options?: PlayOptions) => {
