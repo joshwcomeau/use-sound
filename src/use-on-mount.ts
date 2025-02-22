@@ -1,5 +1,7 @@
-import * as React from 'react';
+import { useEffect, EffectCallback, DependencyList } from 'react';
 
-export default function useOnMount(callback: React.EffectCallback) {
-  React.useEffect(callback, []);
-}
+const useOnMount = (callback: EffectCallback, deps: DependencyList = []) => {
+  useEffect(callback, deps);
+};
+
+export default useOnMount;

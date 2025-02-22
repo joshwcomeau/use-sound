@@ -9,6 +9,7 @@ export type HookOptions<T = any> = T & {
   interrupt?: boolean;
   soundEnabled?: boolean;
   sprite?: SpriteMap;
+  skip?: boolean;
   onload?: () => void;
 };
 
