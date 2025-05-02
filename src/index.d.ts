@@ -6,6 +6,7 @@ export default function useSound(
     playbackRate,
     soundEnabled,
     interrupt,
+    loop,
     onload,
     ...delegated
   }?: HookOptions
