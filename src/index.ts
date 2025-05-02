@@ -92,17 +92,17 @@ export default function useSound<T = any>(
   // Whenever volume/playbackRate/loop are changed, change those properties
   // on the sound instance.
   React.useEffect(() => {
-    if (sound) {
-      sound.volume(volume);
-      sound.rate(playbackRate);
-      sound.loop(loop);
+      if (sound) {
+        sound.volume(volume);
+        sound.loop(loop);
+      }
+
+      // HACK: When a sprite is defined, `sound.rate()` throws an error, because Howler tries to reset the "_default" sprite, which doesn't exist. This is likely a bug within Howler, but I don’t have the bandwidth to investigate, so instead, we’re ignoring playbackRate changes when a sprite is defined.
+      if (!delegated.sprite) {
+        sound.rate(playbackRate);
+      }
     }
-    // A weird bug means that including the `sound` here can trigger an
-    // error on unmount, where the state loses track of the sprites??
-    // No idea, but anyway I don't need to re-run this if only the `sound`
-    // changes.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [volume, playbackRate, loop]);
+  }, [sound, volume, playbackRate, loop]);
 
   const play: PlayFunction = React.useCallback(
     (options?: PlayOptions) => {

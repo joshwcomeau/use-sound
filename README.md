@@ -128,6 +128,8 @@ export const RisingPitch = () => {
 };
 ```
 
+> NOTE: This example won’t work if you’re using sprites (defined below). The `playbackRate` option is only reactive when using a single sound.
+
 ---
 
 ## Usage Notes
@@ -226,6 +228,8 @@ When calling `useSound`, you can pass it a variety of options:
 
 `[delegated]` refers to the fact that any additional argument you pass in `HookOptions` will be forwarded to the `Howl` constructor. See "Escape hatches" below for more information.
 
+> NOTE: If a `sprite` is passed, `playbackRate` will not be reactive. This means that only the _initial_ value for `playbackRate` will be used.
+
 ### The `play` function
 
 When calling the hook, you get back a play function as the first item in the tuple:
@@ -316,6 +320,8 @@ To play a specific sprite, we'll pass its `id` when calling the `play` function:
   onClick={() => play({id: 'laser'})}
 >
 ```
+
+> NOTE: When using sprites, the `playbackRate` parameter will not be reactive. This means that only the _initial_ value for `playbackRate` will be used.
 
 ### Escape hatches
 
