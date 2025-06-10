@@ -50,7 +50,7 @@ If your project uses TypeScript, you should also install the `@types/howler` pac
 
 **[The tutorial](https://joshwcomeau.com/react/announcing-use-sound-react-hook/)** includes many demos, as well as instructions for finding and preparing sound effects. It's a great place to start.
 
-You can also **[view the storybook](https://use-sound.netlify.com/)**, which includes lots of quick examples.
+You can also **[view the storybook](https://use-sound.netlify.app/)**, which includes lots of quick examples.
 
 ---
 
