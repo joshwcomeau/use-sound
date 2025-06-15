@@ -10,6 +10,7 @@ export type HookOptions<T = any> = T & {
   soundEnabled?: boolean;
   sprite?: SpriteMap;
   onload?: () => void;
+  loop?: boolean;
 };
 
 export interface PlayOptions {

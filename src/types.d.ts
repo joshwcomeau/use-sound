@@ -9,6 +9,7 @@ export interface HookOptions {
   soundEnabled?: boolean;
   sprite?: SpriteMap;
   onload?: () => void;
+  loop?: boolean;
 }
 export interface PlayOptions {
   id?: string;

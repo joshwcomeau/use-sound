@@ -68,5 +68,9 @@
     "semi": true,
     "singleQuote": true,
     "trailingComma": "es5"
+  },
+  "volta": {
+    "node": "13.12.0",
+    "yarn": "1.22.22"
   }
 }
